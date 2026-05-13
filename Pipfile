@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+djangorestframework = "*"
+channels = "*"
+django = "<5.3,>5.2"
 
 [dev-packages]
 

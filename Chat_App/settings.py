@@ -31,14 +31,18 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',    
+    'Chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'Chat'
+    'django.contrib.staticfiles',    
+    'rest_framework'
 ]
+
+ASGI_APPLICATION="Chat_App.asgi.application"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
