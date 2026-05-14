@@ -1,6 +1,8 @@
 import channels.exceptions
+from channels.db import database_sync_to_async
 from urllib.parse import parse_qs
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
+from .models import Message, Room
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -26,12 +28,24 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     async def receive_json(self, content):
         message = content["message"]
 
+        # save to database
+        await self.save_message(message)
+
         await self.channel_layer.group_send(
             self.room_group_name, {
                 "type": "chat.message",
                 "message": message,
                 "username": self.username
             }
+        )
+
+    @database_sync_to_async
+    def save_message(self, message):
+        room = Room.objects.get(name=self.room_name)
+        Message.objects.create(
+            room=room,
+            username=self.username,
+            content=message
         )
 
     async def chat_message(self, event):
