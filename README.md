@@ -60,7 +60,7 @@ Chat_App/
 1. Clone the repository
 
 ```bash
-git clone https://github.com/judesedem/chatapp-api.git
+git clone https://github.com/judesedem/Chat_App.git
 cd chatapp-api
 ```
 
