@@ -25,13 +25,15 @@ SECRET_KEY = 'django-insecure-csvn72hsk(b_nsj%3_)yjynecz7-_r0s(9gazgecpiw_im4&m3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',    
+    'daphne',   
+    'channels', 
     'Chat',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -39,12 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',    
-    'rest_framework'
+    'rest_framework',
+    'corsheaders'
 ]
 
 ASGI_APPLICATION="Chat_App.asgi.application"
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
