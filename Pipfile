@@ -7,6 +7,9 @@ name = "pypi"
 djangorestframework = "*"
 channels = "*"
 django = "<5.3,>5.2"
+daphne = "*"
+django-cors-headers = "*"
+channels-redis = "*"
 
 [dev-packages]
 
